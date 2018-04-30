@@ -4,7 +4,7 @@ import getters from './getters'
 // modules
 import article from './modules/article'
 import contentList from './modules/contentList'
-
+import user from './modules/user'
 
 
 // 非生产环境下开启严格模式，用以检测是否有在 mutation 外改变 store
@@ -21,11 +21,12 @@ import contentList from './modules/contentList'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
-  modules: {
-    article,
-    contentList
-  },
-  getters
+    modules: {
+        article,
+        contentList,
+        user
+    },
+    getters
 })
 
 export default store

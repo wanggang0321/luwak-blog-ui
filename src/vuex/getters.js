@@ -28,6 +28,7 @@
 
 const getters = {
   // article: state => state.article,
-  contentList: state => state.contentList.contentList
+  contentList: state => state.contentList.contentList,
+
 }
 export default getters

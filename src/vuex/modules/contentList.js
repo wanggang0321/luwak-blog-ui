@@ -20,7 +20,7 @@ const contentList = {
     // 分页查询首页列表
     getContentByPage({commit, state, dispatch}, page) {
       return new Promise((resolve, reject) => {
-        getContentByPage(page, 1).then(res => {
+        getContentByPage(page, 10).then(res => {
           commit('GET_CONTENT_LIST', res.data.list)
         })
       })
