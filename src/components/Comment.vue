@@ -2,23 +2,23 @@
   <div class="comment">
     <h1>评论</h1>
     <ul class="comments-list">
-      <li class="comment-item" v-for="item in CommentsList" :key="item.objectId">
+      <li class="comment-item" v-for="item in commentList" :key="item.id">
         <div class="item-title">
-          <span class="title-name" v-text="item.name"></span>
-          <span class="title-createdAt" v-text="item.createdAt"></span>
+          <span class="title-name" v-text="item.username"></span>
+          <span class="title-createdAt" v-text="item.createTime"></span>
         </div>
         <!--评论回复-->
-        <div v-if="item.reply" class="item-reply">
+        <div v-if="item.replyList" class="item-reply">
           <div class="item-title">
-            <span class="title-name" v-text="item.reply.name"></span>
-            <span class="title-createdAt" v-text="item.reply.createdAt"></span>
+            <span class="title-name" v-text="item.reply.username"></span>
+            <span class="title-createdAt" v-text="item.reply.createTime"></span>
           </div>
           <p class="item-content" v-text="item.reply.content"></p>
         </div>
 
         <p class="item-content" v-text="item.content"></p>
         <div class="comment-reply">
-          <a href="javascript:void(0)" @click="reply(item.objectId, item.name)" class="reply">回复</a>
+          <a href="javascript:void(0)" @click="reply(item.id, item.username)" class="reply">回复</a>
         </div>
       </li>
     </ul>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+  import {mapGetters} from "vuex"
   export default {
     data() {
       return {
@@ -47,20 +48,21 @@
       }
     },
     created() {
-      // this.$store.dispatch('getCommentsList', this.articleId)
+      this.$store.dispatch('getCommentsList', this.articleId)
     },
     computed: {
-      // CommentsList() {
-      //   return [].slice.call(this.$store.state.commentsList.commentsList).map((item, index, arr) => {
-      //     if (item.reply) {
-      //       const replyToId = item.reply
+      ...mapGetters(["commentList"])
+      // commentList() {
+      //   return [].slice.call(...mapGetters(["commentList"])).map((item, index, arr) => {
+      //     if (item.replyList) {
+      //       const replyToId = item.replyList
       //       let obj = {}
-      //       let reply = arr.find(data => data.objectId === replyToId)
-      //       obj.objectId = item.objectId
+      //       let reply = arr.find(data => data.id === replyToId)
+      //       obj.id = item.id
       //       obj.name = item.name
-      //       obj.createdAt = item.createdAt
+      //       obj.createdTime = item.createdTime
       //       obj.content = item.content
-      //       obj.reply = reply
+      //       obj.replyList = reply
       //
       //       return obj
       //     }
@@ -92,6 +94,7 @@
         });
       },
       reply(replyToId, replyToName) {
+        // console.log(replyToName)
         this.replyName = replyToName
 
         var anchor = this.$el.querySelector('#firstAnchor')

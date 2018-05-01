@@ -4,6 +4,7 @@ import getters from './getters'
 // modules
 import article from './modules/article'
 import contentList from './modules/contentList'
+import commentList from './modules/commentList'
 import user from './modules/user'
 
 
@@ -23,8 +24,9 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     modules: {
         article,
+        commentList,
         contentList,
-        user
+        user,
     },
     getters
 })

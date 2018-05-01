@@ -8,7 +8,7 @@
         </header>
         <div class="article-wrapper">
             <div class="title" v-text="article.title"></div>
-            <div class="create">{{article.createdAt | handleDateFormat}}</div>
+            <div class="create">{{article.createTime}}</div>
             <div class="content markdown-body" v-html="content"></div>
 
             <Comment></Comment>
@@ -34,7 +34,7 @@
         computed: Vuex.mapState({
             article: state => state.article,
             loading: state => state.article.loading,
-            content(){
+            content() {
                 let _content = this.article.content
                 marked(_content, (err, content) => {
                     if (!err) {
